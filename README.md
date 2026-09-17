@@ -100,6 +100,29 @@ sa `:root` ng CSS:
 --img-hero: url("https://cdn.webcake.co/.../hero.jpg");
 ```
 
+## Responsiveness — paano ito gumagana
+
+Ang page ay **container-based**, hindi viewport-based. May wrapper na
+`<div class="mlr">` na may `container-type: inline-size`, at lahat ng sukat
+(`cqi` units + `@container` queries + `auto-fit` grids) ay sumusunod sa lapad
+ng **block** na kinalalagyan nito — hindi sa lapad ng browser window.
+
+Ibig sabihin: tama ang itsura kahit ilagay mo sa makitid na column ng WebCake,
+sa tablet, o sa cellphone. Kung viewport-based ito (gaya ng karaniwan), lalabas
+na desktop layout ang page sa loob ng makitid na WebCake block.
+
+Dalawang bagay na **huwag galawin**:
+1. Ang `<div class="mlr">` wrapper — dito nakasalalay ang buong pag-adjust.
+2. Ang sticky CTA bar na nasa **labas** ng `.mlr` — kapag inilipat mo sa loob,
+   titigil itong dumikit sa ibaba ng screen (ang size container ay nagiging
+   containing block ng `position:fixed`).
+
+May JS din na nagbabalik ng `<meta name="viewport">` kung tinanggal ito ng
+page builder — iyon ang pinakamadalas na dahilan ng "hindi responsive" na page.
+
+Nasubukan mula **320px hanggang 1920px**, at sa loob ng mga container na
+320/380/480/600/768/900/1100px — walang horizontal scroll at walang overflow.
+
 ## Compliance
 Naka-lagay na sa page ang **“No Approved Therapeutic Claims”** at ang paalala
 na kumonsulta sa doktor. Structure/function ang pananalita ng mga benepisyo
