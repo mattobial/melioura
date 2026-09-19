@@ -13,7 +13,8 @@ ASSETS = ROOT / "assets"
 OUT = ROOT / "melioura-landing.html"
 
 html = TEMPLATE.read_text(encoding="utf-8")
-for name in ("hero", "lifestyle", "sunrise", "cap"):
+for name in ("hero", "lifestyle", "sunrise", "cap",
+             "capsules", "leaf", "flower", "stonetex"):
     f = ASSETS / f"{name}.jpg"
     if not f.exists():
         sys.exit(f"missing asset: {f}")

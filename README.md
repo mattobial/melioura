@@ -100,6 +100,43 @@ sa `:root` ng CSS:
 --img-hero: url("https://cdn.webcake.co/.../hero.jpg");
 ```
 
+## Mga larawan — saan ginagamit ang bawat isa
+
+**Walang inuulit.** Walong magkakaibang larawan, isang beses lang bawat isa:
+
+| Larawan | Saan lumalabas |
+|---|---|
+| `hero.jpg` | Hero — bote sa bato |
+| `capsules.jpg` | Seksyon ng “Bakit Glycinate” |
+| `lifestyle.jpg` | “Ano ang Nasa Loob” |
+| `cap.jpg` | “Paano Ito Inumin” (bilog na detalye) |
+| `leaf.jpg` · `flower.jpg` · `stonetex.jpg` | Nature strip |
+| `sunrise.jpg` | Banner CTA |
+
+Ang bilang ng bote sa pricing cards ay **SVG na guhit**, hindi litrato — kaya
+hindi paulit-ulit ang parehong larawan sa tatlong card, at mas mabilis maintindihan
+kung ilang bote ang makukuha.
+
+### ⚠️ Ang pinakamalaking pagkakataon: totoong litrato
+Lahat ng larawan sa itaas ay **crop mula sa iisang brand board** — maganda,
+pero pawang product at texture shots. Ang pinakamataas na converting sa PH
+COD market ay **litrato ng totoong tao**. Kung isa lang ang kaya mong kunan:
+
+1. **Customer na hawak ang bote** (UGC style, cellphone photo lang, natural light)
+2. Bote sa tabi ng kama / bedside table sa gabi
+3. Bote sa kamay — para makita ang totoong laki
+4. Unboxing: parcel, box, at bote
+
+I-upload sa WebCake media library, tapos palitan ang `--img-*` variable
+sa `:root` ng CSS. Isang linya lang bawat isa.
+
+## Bigat ng page
+
+Humigit-kumulang **395 KB** ang self-contained na file dahil naka-base64 ang
+walong larawan. Sa mobile data, mas mabilis kung **i-upload mo ang mga litrato
+sa WebCake** at ituro na lang ang `--img-*` sa CDN links — bumababa ito sa
+~60 KB na HTML.
+
 ## Responsiveness — paano ito gumagana
 
 Ang page ay **container-based**, hindi viewport-based. May wrapper na
