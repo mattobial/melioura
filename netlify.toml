@@ -1,0 +1,9 @@
+# Static preview ng landing page. Walang build step — HTML lang.
+[build]
+  publish = "public"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

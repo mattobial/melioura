@@ -160,6 +160,26 @@ page builder — iyon ang pinakamadalas na dahilan ng "hindi responsive" na page
 Nasubukan mula **320px hanggang 1920px**, at sa loob ng mga container na
 320/380/480/600/768/900/1100px — walang horizontal scroll at walang overflow.
 
+## Pag-host ng public preview
+
+Ang `public/` folder ang deployable na kopya (`index.html` + `robots.txt`).
+Ginagawa ito ng `build.py` kasabay ng `melioura-landing.html`. May `noindex`
+ito at may nakikitang “Sample” na tag sa testimonials, kaya hindi ito
+mapagkakamalang live store habang placeholder pa ang mga review.
+
+**Netlify (nakagawa na ang site: `melioura-ph`)**
+```bash
+npx netlify-cli deploy --prod --dir=public --site melioura-ph
+```
+O mas madali: i-drag ang `public/` folder sa https://app.netlify.com/drop
+
+**GitHub Pages** — naka-push na ang `public/`. Sa repo Settings → Pages,
+piliin ang branch na `claude/philippines-landing-page-jkuwk4` at folder na
+`/public`. Kailangang public ang repo (o GitHub Pro kung private).
+
+> Ang WebCake pa rin ang totoong destinasyon ng page. Ang hosting sa itaas ay
+> para lang makapag-preview at makapag-share habang hindi pa live.
+
 ## Compliance
 Naka-lagay na sa page ang **“No Approved Therapeutic Claims”** at ang paalala
 na kumonsulta sa doktor. Structure/function ang pananalita ng mga benepisyo
