@@ -22,6 +22,7 @@
   --img-bed:     url("__IMG_BED__");       /* sleep banner */
   --img-woman:   url("__IMG_WOMAN__");     /* bakit glycinate */
   --img-couple:  url("__IMG_COUPLE__");    /* araw-araw na ritwal */
+  --img-pack:    url("__IMG_PACK__");      /* ganito ang darating */
 
   /* Brand palette — galing sa Melioura brand board */
   --green:#4F6152; --green-dk:#3B4A3E; --green-lt:#7C8E7F;
@@ -48,7 +49,7 @@ body{
   font-family:var(--sans); font-size:17px; line-height:1.72; font-weight:400;
   -webkit-font-smoothing:antialiased; overflow-x:hidden;
 }
-img{max-width:100%; display:block; border:0}
+img{max-width:100%; height:auto; display:block; border:0}
 a{color:inherit}
 h1,h2,h3,h4{font-family:var(--serif); font-weight:600; line-height:1.14; margin:0 0 .5em; letter-spacing:.005em}
 h1{font-size:2.4rem; font-size:clamp(2.05rem,6.2cqi,3.7rem)}
@@ -298,6 +299,7 @@ table.cmp tbody tr:last-child td{border-bottom:0}
 .split-media .shot{max-width:400px; margin:0 auto; border-radius:14px; background-size:cover; background-position:center}
 .shot--woman{background-image:var(--img-woman); aspect-ratio:640/800}
 .shot--couple{background-image:var(--img-couple); aspect-ratio:760/950}
+.shot--pack{background-image:var(--img-pack); aspect-ratio:640/800}
 .spec{list-style:none; padding:0; margin:22px 0 0; display:grid; gap:0}
 .spec li{
   display:flex; justify-content:space-between; gap:16px; padding:13px 0;
@@ -329,9 +331,12 @@ table.cmp tbody tr:last-child td{border-bottom:0}
 
 /* ---------- Ready-made creative, buo ang ipinapakita ---------- */
 .creative{
-  display:block; width:100%; max-width:480px; margin:0 auto; border-radius:16px;
-  box-shadow:var(--shadow-l);
+  display:block; width:100%; height:auto; max-width:480px; margin:0 auto;
+  border-radius:16px; box-shadow:var(--shadow-l);
 }
+/* Naka-baked ang teksto sa creative na ito at nakasukat para sa full-screen
+   na social feed — kaya binibigyan natin ito ng mas malaking lapad sa desktop. */
+@container pg (min-width:820px){ .creative{max-width:580px} }
 
 /* ---------- Testimonials ---------- */
 .sec--rev{background:linear-gradient(180deg,#F2ECE2,var(--cream))}
@@ -851,6 +856,24 @@ body.has-sticky{padding-bottom:0}
   <div class="wrap center">
     <img class="creative rv" src="__IMG_BRAND_SRC__" alt="Melioura — a small daily ritual for a calmer, more balanced tomorrow" loading="lazy" width="800" height="1000">
     <a class="btn btn--lg rv" href="#order" style="margin:28px auto 0">Gusto Ko Na Nito<small>Bayad pagdating sa bahay mo</small></a>
+  </div>
+</section>
+
+<!-- ============ GANITO ANG DARATING (COD trust) ============ -->
+<section class="sec sec--tight sec--cmp">
+  <div class="wrap split">
+    <div class="split-media rv"><div class="shot shot--pack" role="img" aria-label="Melioura bote, box at capsules"></div></div>
+    <div class="rv">
+      <p class="eyebrow">Bago Ka Magbayad</p>
+      <h2>Ganito ang<br>Darating Sa'Yo</h2>
+      <hr class="rule rule--left">
+      <ul class="hero-list">
+        <li><span class="tick" aria-hidden="true">✓</span><span><strong>Sealed na bote</strong> — 60 vegetarian capsules</span></li>
+        <li><span class="tick" aria-hidden="true">✓</span><span><strong>Plain box</strong> — walang nakasulat sa labas</span></li>
+        <li><span class="tick" aria-hidden="true">✓</span><span><strong>Tingnan mo muna</strong> bago magbayad</span></li>
+      </ul>
+      <a class="btn" href="#order" style="margin-top:22px">Order Na<small>Cash on Delivery</small></a>
+    </div>
   </div>
 </section>
 

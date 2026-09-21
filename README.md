@@ -110,11 +110,18 @@ sa `:root` ng CSS:
 | `bed.webp` | Sleep banner (full-bleed) | Tugma sa hook na “Ala-una na, gising ka pa rin” |
 | `woman.webp` | “Bakit Glycinate” | Totoong tao + totoong laki ng bote |
 | `couple.webp` | “Isang Maliit na Ritwal” | Ipinapakita mismo ang pag-inom — hindi na kailangang ipaliwanag |
-| `brand.webp` | Bago ang presyo | May sariling text na ang creative, kaya buo itong ipinapakita |
+| `brand.webp` | Pagkatapos ng testimonials | May sariling text na ang creative, kaya buo itong ipinapakita |
+| `pack.webp` | “Ganito ang Darating Sa’Yo” | Bote + box + capsules — sagot sa tanong na “ano ba talaga ang matatanggap ko?” bago pa ang presyo |
 
 Ang bilang ng bote sa pricing cards ay **SVG na guhit**, hindi litrato — kaya
 mas mabilis maintindihan kung ilang bote ang makukuha, at walang paulit-ulit
 na larawan.
+
+### ⚠️ Huwag alisin ang `height:auto` sa mga `<img>`
+Kapag may `width` at `height` attributes ang isang `<img>` pero walang
+`height:auto` sa CSS, ginagamit ng browser ang `height` attribute bilang
+tunay na taas — at nagmumukhang **stretched** ang litrato. May global na
+`img{max-width:100%; height:auto}` na sa CSS para hindi na ito maulit.
 
 ### Kung magpapalit ka ng litrato
 Palitan lang ang file sa `assets/` (panatilihin ang pangalan) at patakbuhin ang
