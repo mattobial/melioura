@@ -60,8 +60,10 @@ TAG = ('<span style="display:inline-block;background:#8A6A33;color:#FFF3E0;'
        'font-family:Jost,Arial,sans-serif;font-size:.68rem;font-weight:600;'
        'letter-spacing:.14em;text-transform:uppercase;padding:6px 16px;'
        'border-radius:999px;margin-bottom:18px">'
-       '⚠ Sample — palitan ng totoong review</span>\n      ')
-ANCHOR = '<p class="eyebrow">Mula sa Mga Gumagamit</p>'
+       '⚠ Sample reviews — replace with real ones</span>\n      ')
+# Anchored on a class, not on copy, so rewording the page cannot silently
+# drop this marker.
+ANCHOR = '<div class="rev-top rv">'
 
 hosted = fill(template, external)
 hosted = hosted.replace('<meta name="viewport"',

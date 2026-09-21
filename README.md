@@ -1,193 +1,171 @@
 # Melioura PH — Landing Page (WebCake)
 
-High-converting Taglish landing page para sa **Melioura Magnesium Glycinate**,
-ginawa para sa Philippine COD market.
+High-converting English landing page for **Melioura Magnesium Glycinate**,
+written for the Philippine Cash-on-Delivery market.
 
-## Ang ide-deploy mo
+## What you deploy
 
-**`melioura-landing.html`** — isang file lang, self-contained. Naka-embed na ang
-mga litrato (base64), walang external dependency maliban sa Google Fonts.
+`build.py` produces two versions:
 
-### Paano i-paste sa WebCake
-1. Gumawa ng bagong page sa WebCake.
-2. Maglagay ng **HTML / Embed / Custom Code** block na buong lapad (full width).
-3. I-paste ang **buong laman** ng `melioura-landing.html`.
-4. I-preview sa cellphone bago i-publish.
-
-> Kung hindi pinapayagan ng WebCake plan mo ang `<script>` sa HTML block:
-> gamitin ang **native Order Form element** ng WebCake (tingnan sa baba) at
-> tanggalin ang `<script>` sa dulo. Gagana pa rin ang buong disenyo — ang
-> mawawala lang ay ang countdown, ang auto-sync ng summary, at ang sticky bar.
-
----
-
-## Bago mag-publish — 6 na bagay na dapat palitan
-
-Hanapin mo lang ang salitang **`PALITAN`** sa file (Ctrl+F).
-
-| # | Ano | Saan |
-|---|-----|------|
-| 1 | **Presyo at package** | `data-price` / `data-qty` / `data-was` sa `<section id="buy">` |
-| 2 | **Mga testimonial** | `<section class="sec sec--rev">` — sample lang ang nandoon |
-| 3 | **FDA LTO at CPN number** | footer |
-| 4 | **Contact details** (number, email, FB page) | footer |
-| 5 | **Dosage** | `<section class="sec sec--how">` — itugma sa aktuwal na label |
-| 6 | **Saan pupunta ang order** | `CONFIG.FORM_ENDPOINT` sa `<script>` |
-
-### 1. Presyo
-Dito ka lang mag-e-edit. Sinusundan ito ng order form at ng sticky bar automatically:
-
-```html
-<div class="plan" data-plan="3 Bottles — Buy 2 Take 1"
-     data-qty="3" data-price="1980" data-was="4770">
-```
-Huwag kalimutang i-update din ang nakikitang teksto sa loob ng card.
-
-### 2. Testimonials — **mahalaga ito**
-Placeholder lang ang anim na review sa file. Palitan mo ng **totoong feedback**
-mula sa mga aktuwal na customer bago i-publish. Ang gawa-gawang review ay labag
-sa DTI rules at sa patakaran ng Facebook/TikTok ads — pwedeng ma-ban ang ad
-account mo. Ganoon din ang “4.9 / 5” na rating sa hero.
-
-### 6. Saan pupunta ang order
-**Option A — WebCake native form (inirerekomenda).**
-Palitan ang buong `<form class="order-form"> ... </form>` ng Order Form element
-ng WebCake. Huwag alisin ang `<section id="order">` — doon naka-turo lahat ng
-buton sa page.
-
-**Option B — sariling endpoint.**
-```js
-FORM_ENDPOINT: "https://script.google.com/macros/s/AKfy.../exec",
-```
-Pwedeng Google Apps Script, Zapier, o Make webhook. Nagpapadala ito ng JSON:
-`package, quantity, amount, name, phone, address, city, province, note, payment, page, at`.
-
-> ⚠️ Kapag **blangko** ang `FORM_ENDPOINT`, lalabas pa rin ang “salamat” screen
-> pero **walang napupuntahan ang order**. Pang-test lang iyon.
-
----
-
-## Facebook / TikTok Pixel
-May naka-comment na tracking hooks sa dulo ng `<script>` (`fbq`, `ttq`, `gtag`).
-I-uncomment mo lang kapag naka-install na ang pixel sa WebCake page settings.
-
-## Iba pang setting
-```js
-COUNTDOWN_HOURS: 5,      // haba ng promo timer
-DEFAULT_PLAN_INDEX: 1    // 0 = 1 bote, 1 = 3 bote, 2 = 5 bote
-```
-
----
-
-## Para sa mga developer
-
-```
-src/template.html   # source, may __IMG_*__ placeholders
-assets/*.jpg        # product photos (cropped mula sa brand board)
-build.py            # nag-i-inline ng assets bilang base64
-melioura-landing.html  # output — ito ang i-pa-paste sa WebCake
-```
+| File | Size | Use it for |
+|---|---|---|
+| `melioura-landing.html` | ~487 KB (single file) | Paste into a WebCake HTML block |
+| `public/index.html` | 79 KB + 306 KB images | Netlify / GitHub Pages — much faster on mobile data |
 
 ```bash
 python3 build.py
 ```
 
-Kung i-a-upload mo ang mga litrato sa WebCake media library (mas mabilis
-mag-load kaysa base64), palitan mo na lang ang apat na `--img-*` variables
-sa `:root` ng CSS:
+### Pasting into WebCake
+1. Create a new page in WebCake.
+2. Add a full-width **HTML / Embed / Custom Code** block.
+3. Paste the **entire contents** of `melioura-landing.html`.
+4. Preview on a phone before publishing.
 
-```css
---img-hero: url("https://cdn.webcake.co/.../hero.jpg");
+> If your WebCake plan does not allow `<script>` inside an HTML block, use
+> WebCake's **native Order Form element** (see below) and delete the `<script>`
+> at the end. The design still works — you only lose the countdown, the
+> automatic order summary and the sticky bar.
+
+---
+
+## Before you publish — 6 things to replace
+
+Search the file for **`REPLACE`** (Ctrl+F).
+
+| # | What | Where |
+|---|---|---|
+| 1 | **Prices and packages** | `data-price` / `data-qty` / `data-was` in `<section id="buy">` |
+| 2 | **Testimonials** | `<section class="sec sec--rev">` — all six are samples |
+| 3 | **FDA LTO and CPN numbers** | footer |
+| 4 | **Contact details** (number, email, FB page) | footer |
+| 5 | **Dosage** | the "One Small Habit" section — match your actual label |
+| 6 | **Where orders go** | `CONFIG.FORM_ENDPOINT` in the `<script>` |
+
+### 1. Prices
+Edit these only. The order form and the sticky bar follow them automatically:
+
+```html
+<div class="plan" data-plan="3 Bottles — Buy 2 Get 1 Free"
+     data-qty="3" data-price="1980" data-was="4770">
 ```
+Remember to update the visible text inside the card too.
 
-## Mga larawan — saan ginagamit ang bawat isa
+### 2. Testimonials — **important**
+All six reviews are placeholders. Replace them with **real customer feedback**
+before publishing. Invented reviews breach DTI rules and Facebook/TikTok ad
+policy, and can get your ad account banned. The same goes for the "4.9 / 5"
+rating in the hero.
 
-**Limang totoong litrato, isang beses lang bawat isa. Walang inuulit.**
+The hosted copy in `public/` shows a visible "Sample reviews" badge and carries
+`noindex` for exactly this reason. Both disappear once you swap in real reviews
+and remove the badge from `build.py`.
 
-| Larawan | Saan lumalabas | Bakit doon |
+### 6. Where orders go
+**Option A — WebCake native form (recommended).**
+Replace the whole `<form class="order-form"> ... </form>` with your WebCake
+Order Form element. Do not remove `<section id="order">` — every button on the
+page points at it.
+
+**Option B — your own endpoint.**
+```js
+FORM_ENDPOINT: "https://script.google.com/macros/s/AKfy.../exec",
+```
+Google Apps Script, Zapier or Make all work. It POSTs JSON:
+`package, quantity, amount, name, phone, address, city, province, note, payment, page, at`.
+
+> ⚠️ If `FORM_ENDPOINT` is **blank**, the thank-you screen still appears but
+> **the order goes nowhere**. That is test mode only.
+
+---
+
+## Photos — where each one is used
+
+**Six real photographs, each used exactly once. Nothing repeats.**
+
+| Photo | Where it appears | Why there |
 |---|---|---|
-| `product.webp` | Hero | Transparent ang background, kaya lumulutang ang bote — walang kahon, mas premium |
-| `bed.webp` | Sleep banner (full-bleed) | Tugma sa hook na “Ala-una na, gising ka pa rin” |
-| `woman.webp` | “Bakit Glycinate” | Totoong tao + totoong laki ng bote |
-| `couple.webp` | “Isang Maliit na Ritwal” | Ipinapakita mismo ang pag-inom — hindi na kailangang ipaliwanag |
-| `brand.webp` | Pagkatapos ng testimonials | May sariling text na ang creative, kaya buo itong ipinapakita |
-| `pack.webp` | “Ganito ang Darating Sa’Yo” | Bote + box + capsules — sagot sa tanong na “ano ba talaga ang matatanggap ko?” bago pa ang presyo |
+| `product.webp` | Hero | Transparent background, so the bottle floats — no box, more premium |
+| `bed.webp` | Sleep banner (full-bleed) | Matches the "It's 1 AM, you're still awake" hook |
+| `woman.webp` | "Why Glycinate" | A real person, and it shows the true size of the bottle |
+| `couple.webp` | "One Small Habit" | Shows the routine being taken, so the copy can stay short |
+| `pack.webp` | "Here's What Arrives" | Bottle + box + capsules, answering the COD buyer's question before the price |
+| `brand.webp` | After the testimonials | A finished creative with its own typography, shown whole |
 
-Ang bilang ng bote sa pricing cards ay **SVG na guhit**, hindi litrato — kaya
-mas mabilis maintindihan kung ilang bote ang makukuha, at walang paulit-ulit
-na larawan.
+The bottle count on the pricing cards is **drawn as SVG**, not a photo, so the
+same image is never repeated across the three cards.
 
-### ⚠️ Huwag alisin ang `height:auto` sa mga `<img>`
-Kapag may `width` at `height` attributes ang isang `<img>` pero walang
-`height:auto` sa CSS, ginagamit ng browser ang `height` attribute bilang
-tunay na taas — at nagmumukhang **stretched** ang litrato. May global na
-`img{max-width:100%; height:auto}` na sa CSS para hindi na ito maulit.
+> `brand.webp` has its text baked in at a size meant for full-screen social
+> feeds, so it reads small at page width. It will work hardest as the actual
+> Facebook/TikTok ad that drives traffic to this page.
 
-### Kung magpapalit ka ng litrato
-Palitan lang ang file sa `assets/` (panatilihin ang pangalan) at patakbuhin ang
-`python3 build.py`. Kung sa WebCake media library mo ia-upload, palitan ang
-`--img-*` variables sa `:root` ng CSS.
+### ⚠️ Never remove `height:auto` from `<img>`
+If an `<img>` has `width` and `height` attributes but no `height:auto` in CSS,
+the browser uses the height attribute as the real height and the photo renders
+**stretched**. There is a global `img{max-width:100%; height:auto}` rule to stop
+this happening again.
 
-## Bigat ng page
+### Swapping a photo
+Drop a replacement into `assets/` keeping the same filename and run
+`python3 build.py`. To serve them from the WebCake media library instead, point
+the `--img-*` variables in `:root` at your CDN links.
 
-Dalawang bersyon ang ginagawa ng `build.py`:
+---
 
-| File | Laki | Para saan |
-|---|---|---|
-| `melioura-landing.html` | ~418 KB (isang file) | I-paste sa WebCake HTML block |
-| `public/index.html` | 77 KB + 257 KB litrato | Netlify / GitHub Pages — mas mabilis sa mobile data |
+## Hosting a public preview
 
-Mas magaan ang `public/` na bersyon dahil hiwalay ang mga litrato: sabay-sabay
-silang nada-download at naka-cache sa susunod na bisita. Kung kaya ng WebCake
-plan mo ang media library, doon mo i-upload ang mga litrato at ituro ang
-`--img-*` sa CDN links — bumababa ang HTML sa ~77 KB.
+`public/` is the deployable copy (`index.html`, `robots.txt`, `img/`).
 
-## Responsiveness — paano ito gumagana
-
-Ang page ay **container-based**, hindi viewport-based. May wrapper na
-`<div class="mlr">` na may `container-type: inline-size`, at lahat ng sukat
-(`cqi` units + `@container` queries + `auto-fit` grids) ay sumusunod sa lapad
-ng **block** na kinalalagyan nito — hindi sa lapad ng browser window.
-
-Ibig sabihin: tama ang itsura kahit ilagay mo sa makitid na column ng WebCake,
-sa tablet, o sa cellphone. Kung viewport-based ito (gaya ng karaniwan), lalabas
-na desktop layout ang page sa loob ng makitid na WebCake block.
-
-Dalawang bagay na **huwag galawin**:
-1. Ang `<div class="mlr">` wrapper — dito nakasalalay ang buong pag-adjust.
-2. Ang sticky CTA bar na nasa **labas** ng `.mlr` — kapag inilipat mo sa loob,
-   titigil itong dumikit sa ibaba ng screen (ang size container ay nagiging
-   containing block ng `position:fixed`).
-
-May JS din na nagbabalik ng `<meta name="viewport">` kung tinanggal ito ng
-page builder — iyon ang pinakamadalas na dahilan ng "hindi responsive" na page.
-
-Nasubukan mula **320px hanggang 1920px**, at sa loob ng mga container na
-320/380/480/600/768/900/1100px — walang horizontal scroll at walang overflow.
-
-## Pag-host ng public preview
-
-Ang `public/` folder ang deployable na kopya (`index.html` + `robots.txt`).
-Ginagawa ito ng `build.py` kasabay ng `melioura-landing.html`. May `noindex`
-ito at may nakikitang “Sample” na tag sa testimonials, kaya hindi ito
-mapagkakamalang live store habang placeholder pa ang mga review.
-
-**Netlify (nakagawa na ang site: `melioura-ph`)**
+**Netlify** (a site named `melioura-ph` already exists in the account):
 ```bash
 npx netlify-cli deploy --prod --dir=public --site melioura-ph
 ```
-O mas madali: i-drag ang `public/` folder sa https://app.netlify.com/drop
+Or drag the `public/` folder onto https://app.netlify.com/drop
 
-**GitHub Pages** — naka-push na ang `public/`. Sa repo Settings → Pages,
-piliin ang branch na `claude/philippines-landing-page-jkuwk4` at folder na
-`/public`. Kailangang public ang repo (o GitHub Pro kung private).
+**GitHub Pages** — `public/` is pushed. In Settings → Pages, pick branch
+`claude/philippines-landing-page-jkuwk4` and folder `/public`.
 
-> Ang WebCake pa rin ang totoong destinasyon ng page. Ang hosting sa itaas ay
-> para lang makapag-preview at makapag-share habang hindi pa live.
+> WebCake is still the real destination for the live selling page. The hosting
+> above is only for previewing and sharing.
+
+---
+
+## Responsiveness — how it works
+
+The page is **container-based**, not viewport-based. A `<div class="mlr">`
+wrapper declares `container-type: inline-size`, and every size (`cqi` units,
+`@container` queries, `auto-fit` grids) follows the width of the **block** it
+sits in — not the browser window. That is why it looks right inside a narrow
+WebCake column, on a tablet and on a phone.
+
+Two things **not** to change:
+1. The `<div class="mlr">` wrapper — the whole layout adapts through it.
+2. The sticky CTA bar sits **outside** `.mlr`. Move it inside and it stops
+   pinning to the bottom of the screen, because a size container becomes the
+   containing block for `position: fixed`.
+
+There is also JavaScript that restores `<meta name="viewport">` if a page
+builder strips it — the most common cause of a page looking "not responsive".
+
+Tested from **320px to 1920px**, and inside containers of
+320/380/600/768/900/1100px — no horizontal scroll and no overflow.
+
+---
+
+## For developers
+
+```
+src/template.html      # source, with __IMG_*__ placeholders
+assets/*.webp          # the six photographs
+build.py               # produces both versions
+melioura-landing.html  # single-file output → WebCake
+public/                # hosted output → Netlify / GitHub Pages
+```
 
 ## Compliance
-Naka-lagay na sa page ang **“No Approved Therapeutic Claims”** at ang paalala
-na kumonsulta sa doktor. Structure/function ang pananalita ng mga benepisyo
-(“sumusuporta”, “tumutulong”) — hindi panggamot sa sakit. Huwag itong palitan
-ng disease claims; iyon ang pinakamadalas na dahilan ng FDA advisory at ng
-pagka-reject ng ads sa Pilipinas.
+
+The page carries **"No Approved Therapeutic Claims"** and the advice to consult
+a doctor. Benefit copy is deliberately structure/function wording ("supports",
+"helps with") rather than claims to treat disease. Do not upgrade it to disease
+claims — that is the most common trigger for an FDA advisory and for ad
+rejection in the Philippines.
