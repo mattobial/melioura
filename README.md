@@ -81,23 +81,33 @@ Google Apps Script, Zapier or Make all work. It POSTs JSON:
 
 ## Photos — where each one is used
 
-**Six real photographs, each used exactly once. Nothing repeats.**
+**Eight real photographs, each used exactly once. Nothing repeats.**
 
 | Photo | Where it appears | Why there |
 |---|---|---|
 | `product.webp` | Hero | Transparent background, so the bottle floats — no box, more premium |
-| `bed.webp` | Sleep banner (full-bleed) | Matches the "It's 1 AM, you're still awake" hook |
-| `woman.webp` | "Why Glycinate" | A real person, and it shows the true size of the bottle |
-| `couple.webp` | "One Small Habit" | Shows the routine being taken, so the copy can stay short |
-| `pack.webp` | "Here's What Arrives" | Bottle + box + capsules, answering the COD buyer's question before the price |
-| `brand.webp` | After the testimonials | A finished creative with its own typography, shown whole |
+| `bed.webp` | Sleep banner (full-bleed) | Still life, so headline text stays readable over it |
+| `woman.webp` | "Why Glycinate" | She is holding the bottle, which shows its real size |
+| `desk.webp` · `couple.webp` | "However Your Day Ends" strip | Two everyday moments, small and side by side |
+| `night.webp` | "One Small Habit" | She is taking it in bed — matches the "before bed" instruction |
+| `pack.webp` | "Here's What Arrives" | Bottle + box + capsules, answering the COD buyer before the price |
+| `evening.webp` | After the testimonials | Finished creative whose line is "a calmer evening for a brighter tomorrow" |
 
 The bottle count on the pricing cards is **drawn as SVG**, not a photo, so the
 same image is never repeated across the three cards.
 
-> `brand.webp` has its text baked in at a size meant for full-screen social
-> feeds, so it reads small at page width. It will work hardest as the actual
-> Facebook/TikTok ad that drives traffic to this page.
+### Photos kept out of the page on purpose
+
+| File | Why |
+|---|---|
+| `assets/brand.webp` | Daytime pilates creative. Same baked headline as `evening.webp` but a weaker match for a sleep-led page. Kept so you can swap it back in one line. |
+| The desk creative (man + laptop) | Near-duplicate of `brand.webp` in concept and shares its tagline. Two creatives with competing baked headlines make the page read like an ad slideshow. |
+| The brand board | A design sheet, not photography. On a sales page it reads like an internal brand guideline. |
+
+> The creatives with **baked-in text** are sized for full-screen social feeds, so
+> that text reads small at page width. They work hardest as the actual
+> Facebook/TikTok ads that drive traffic to this page. `evening.webp` is the one
+> exception on the page, because its message matches the sleep hook directly.
 
 ### ⚠️ Never remove `height:auto` from `<img>`
 If an `<img>` has `width` and `height` attributes but no `height:auto` in CSS,

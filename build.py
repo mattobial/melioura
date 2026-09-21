@@ -21,7 +21,7 @@ SINGLE = ROOT / "melioura-landing.html"
 PUBLIC = ROOT / "public"
 
 # One photograph per section — see README for the mapping.
-PHOTOS = ("product", "bed", "woman", "couple", "brand", "pack")
+PHOTOS = ("product", "bed", "woman", "night", "desk", "couple", "pack", "evening")
 
 template = TEMPLATE.read_text(encoding="utf-8")
 

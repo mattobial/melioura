@@ -22,7 +22,9 @@
   --img-product: url("img/product.webp");   /* hero — bottle (transparent bg) */
   --img-bed:     url("img/bed.webp");       /* sleep banner */
   --img-woman:   url("img/woman.webp");     /* why glycinate */
-  --img-couple:  url("img/couple.webp");    /* the daily habit */
+  --img-night:   url("img/night.webp");     /* the daily habit */
+  --img-desk:    url("img/desk.webp");      /* evening strip */
+  --img-couple:  url("img/couple.webp");    /* evening strip */
   --img-pack:    url("img/pack.webp");      /* what arrives */
 
   /* Brand palette — from the Melioura brand board */
@@ -299,7 +301,7 @@ table.cmp tbody tr:last-child td{border-bottom:0}
 .split > *{min-width:0}
 .split-media .shot{max-width:400px; margin:0 auto; border-radius:14px; background-size:cover; background-position:center}
 .shot--woman{background-image:var(--img-woman); aspect-ratio:640/800}
-.shot--couple{background-image:var(--img-couple); aspect-ratio:760/950}
+.shot--night{background-image:var(--img-night); aspect-ratio:4/5}
 .shot--pack{background-image:var(--img-pack); aspect-ratio:640/800}
 .spec{list-style:none; padding:0; margin:22px 0 0; display:grid; gap:0}
 .spec li{
@@ -329,6 +331,20 @@ table.cmp tbody tr:last-child td{border-bottom:0}
   color:#F4EFE6; border-radius:999px; padding:7px 15px; font-size:.8rem;
   backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
 }
+
+/* ---------- Evening strip: two lifestyle photos, small and side by side ---------- */
+.strip{
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:12px; margin-top:28px; max-width:720px; margin-inline:auto;
+}
+.strip figure{margin:0}
+.strip .ph{
+  aspect-ratio:4/5; border-radius:14px; background-size:cover; background-position:center;
+  box-shadow:var(--shadow-m); margin-bottom:13px;
+}
+.strip .ph--desk{background-image:var(--img-desk)}
+.strip .ph--gym{background-image:var(--img-couple)}
+.strip figcaption{font-size:.82rem; color:var(--muted); line-height:1.45}
 
 /* ---------- Ready-made creative, shown in full ---------- */
 .creative{
@@ -793,10 +809,29 @@ body.has-sticky{padding-bottom:0}
   </div>
 </section>
 
-<!-- ============ THE DAILY HABIT (couple photo + steps) ============ -->
+<!-- ============ EVENING STRIP ============ -->
+<section class="sec sec--tight sec--cmp">
+  <div class="wrap center">
+    <p class="eyebrow rv">Fits Any Evening</p>
+    <h2 class="rv">However Your Day Ends</h2>
+    <hr class="rule">
+    <div class="strip">
+      <figure class="rv">
+        <div class="ph ph--desk" role="img" aria-label="A woman winding down at her desk in the evening"></div>
+        <figcaption>After a long day at the desk</figcaption>
+      </figure>
+      <figure class="rv">
+        <div class="ph ph--gym" role="img" aria-label="A couple taking Melioura after a workout"></div>
+        <figcaption>After a workout</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE DAILY HABIT (bedtime photo + steps) ============ -->
 <section class="sec sec--cmp">
   <div class="wrap split split--rev">
-    <div class="split-media rv"><div class="shot shot--couple" role="img" aria-label="A couple taking Melioura after a workout"></div></div>
+    <div class="split-media rv"><div class="shot shot--night" role="img" aria-label="A woman taking Melioura with water before bed"></div></div>
     <div class="rv">
       <p class="eyebrow">Very Simple</p>
       <h2>One Small Habit,<br>Every Night</h2>
@@ -872,7 +907,7 @@ body.has-sticky{padding-bottom:0}
 <!-- ============ BRAND CREATIVE + CTA ============ -->
 <section class="sec sec--tight sec--why">
   <div class="wrap center">
-    <img class="creative rv" src="img/brand.webp" alt="Melioura — a small daily ritual for a calmer, more balanced tomorrow" loading="lazy" width="800" height="1000">
+    <img class="creative rv" src="img/evening.webp" alt="Melioura — a calmer evening for a brighter tomorrow" loading="lazy" width="760" height="950">
     <a class="btn btn--lg rv" href="#order" style="margin:28px auto 0">I Want This<small>Pay when it reaches your door</small></a>
   </div>
 </section>
