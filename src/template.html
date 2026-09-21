@@ -18,14 +18,10 @@
    Hal: --img-hero: url("https://cdn.webcake.co/.../bottle.jpg");
    ===================================================================== */
 :root{
-  --img-hero: url("__IMG_HERO__");
-  --img-lifestyle: url("__IMG_LIFESTYLE__");
-  --img-sunrise: url("__IMG_SUNRISE__");
-  --img-cap: url("__IMG_CAP__");
-  --img-capsules: url("__IMG_CAPSULES__");
-  --img-leaf: url("__IMG_LEAF__");
-  --img-flower: url("__IMG_FLOWER__");
-  --img-stonetex: url("__IMG_STONETEX__");
+  --img-product: url("__IMG_PRODUCT__");   /* hero — bote (transparent bg) */
+  --img-bed:     url("__IMG_BED__");       /* sleep banner */
+  --img-woman:   url("__IMG_WOMAN__");     /* bakit glycinate */
+  --img-couple:  url("__IMG_COUPLE__");    /* araw-araw na ritwal */
 
   /* Brand palette — galing sa Melioura brand board */
   --green:#4F6152; --green-dk:#3B4A3E; --green-lt:#7C8E7F;
@@ -190,9 +186,10 @@ section{position:relative}
   background-repeat:no-repeat; box-shadow:var(--shadow-l);
 }
 .hero-shot{
-  background-image:var(--img-hero); background-size:cover; background-position:center;
-  background-repeat:no-repeat; aspect-ratio:560/1093; width:100%; max-width:288px;
-  margin:0 auto; border-radius:14px; animation:float 7s ease-in-out infinite;
+  background-image:var(--img-product); background-size:contain; background-position:center;
+  background-repeat:no-repeat; aspect-ratio:560/694; width:100%; max-width:330px;
+  margin:0 auto; animation:float 7s ease-in-out infinite;
+  filter:drop-shadow(0 24px 38px rgba(43,50,44,.22));
 }
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @media (prefers-reduced-motion:reduce){ .hero-shot{animation:none} .btn::after{animation:none} }
@@ -298,7 +295,9 @@ table.cmp tbody tr:last-child td{border-bottom:0}
 .split{display:grid; gap:32px; gap:clamp(26px,4cqi,54px); align-items:center}
 .split{grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr))}
 .split > *{min-width:0}
-.split-media .shot{aspect-ratio:520/913; max-width:360px; margin:0 auto; border-radius:14px; background-image:var(--img-lifestyle)}
+.split-media .shot{max-width:400px; margin:0 auto; border-radius:14px; background-size:cover; background-position:center}
+.shot--woman{background-image:var(--img-woman); aspect-ratio:640/800}
+.shot--couple{background-image:var(--img-couple); aspect-ratio:760/950}
 .spec{list-style:none; padding:0; margin:22px 0 0; display:grid; gap:0}
 .spec li{
   display:flex; justify-content:space-between; gap:16px; padding:13px 0;
@@ -308,15 +307,31 @@ table.cmp tbody tr:last-child td{border-bottom:0}
 .spec li span:first-child{color:var(--muted)}
 .spec li span:last-child{font-weight:600; color:var(--green-dk); text-align:right}
 
-/* ---------- Banner (sunrise) ---------- */
-.banner{
-  position:relative; background-image:linear-gradient(rgba(43,50,44,.52),rgba(43,50,44,.62)),var(--img-sunrise);
-  background-size:cover; background-position:center; color:#F6F1E8; text-align:center;
-  padding:74px 0; padding:clamp(60px,9cqi,110px) 0;
+/* ---------- Full-bleed photo banner ---------- */
+.bleed{
+  position:relative; background-size:cover; background-position:center;
+  color:#F6F1E8; text-align:center; padding:74px 0; padding:clamp(58px,8cqi,104px) 0;
 }
-.banner h2{color:#fff; font-size:1.95rem; font-size:clamp(1.7rem,4.4cqi,2.7rem)}
-.banner p{color:rgba(246,241,232,.9); max-width:620px; margin:0 auto 26px}
-.banner .btn{margin-inline:auto}
+.bleed--bed{
+  background-image:linear-gradient(180deg,rgba(20,25,21,.50) 0%,rgba(20,25,21,.66) 52%,rgba(20,25,21,.80) 100%),var(--img-bed);
+  background-position:center;
+}
+.bleed h2{color:#fff; font-size:1.95rem; font-size:clamp(1.7rem,4.4cqi,2.7rem)}
+.bleed p{color:rgba(246,241,232,.92); max-width:600px; margin:0 auto 24px}
+.bleed .btn{margin-inline:auto}
+/* Maliliit na chip sa loob ng banner — kapalit ng dating buong seksyon */
+.chips{display:flex; flex-wrap:wrap; justify-content:center; gap:9px; margin-top:6px}
+.chips span{
+  background:rgba(255,255,255,.13); border:1px solid rgba(255,255,255,.22);
+  color:#F4EFE6; border-radius:999px; padding:7px 15px; font-size:.8rem;
+  backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+}
+
+/* ---------- Ready-made creative, buo ang ipinapakita ---------- */
+.creative{
+  display:block; width:100%; max-width:480px; margin:0 auto; border-radius:16px;
+  box-shadow:var(--shadow-l);
+}
 
 /* ---------- Testimonials ---------- */
 .sec--rev{background:linear-gradient(180deg,#F2ECE2,var(--cream))}
@@ -337,22 +352,6 @@ table.cmp tbody tr:last-child td{border-bottom:0}
 .rev-who b{display:block; font-size:.9rem; color:var(--green-dk); font-weight:600; line-height:1.3}
 .rev-who span{font-size:.76rem; color:var(--muted)}
 .vfy{margin-left:auto; font-size:.66rem; letter-spacing:.07em; text-transform:uppercase; color:#3C6140; background:#E4EDE4; padding:3px 9px; border-radius:999px; font-weight:600}
-
-/* ---------- Steps ---------- */
-.sec--how{background:var(--white)}
-.steps{display:grid; grid-template-columns:1fr; gap:18px; margin-top:38px}
-@container pg (min-width:820px){ .steps{grid-template-columns:repeat(3,1fr)} }
-@supports not (container-type:inline-size){
-  @media (min-width:820px){ .steps{grid-template-columns:repeat(3,1fr)} }
-}
-.step{text-align:center; padding:26px 20px; background:var(--cream); border-radius:12px; border:1px solid var(--line)}
-.step-n{
-  width:52px;height:52px;border-radius:50%; margin:0 auto 16px; display:grid; place-items:center;
-  background:linear-gradient(135deg,#D9AE8B,#A9714E); color:#fff;
-  font-family:var(--serif); font-size:1.5rem; font-weight:600; box-shadow:0 6px 16px rgba(169,113,78,.3);
-}
-.step h3{font-size:1.14rem; color:var(--green-dk)}
-.step p{margin:0; font-size:.92rem; color:var(--muted)}
 
 /* ---------- Pricing ---------- */
 .sec--buy{background:linear-gradient(180deg,var(--cream-dp),#EBE2D5)}
@@ -527,6 +526,20 @@ table.cmp tbody tr:last-child td{border-bottom:0}
 @media (min-width:900px){ .sticky{display:none} }
 body.has-sticky{padding-bottom:0}
 
+.ritual{list-style:none; counter-reset:r; padding:0; margin:22px 0 0; display:grid; gap:15px}
+.ritual li{
+  counter-increment:r; position:relative; padding-left:48px;
+  font-size:.95rem; color:#4A5750; line-height:1.6;
+}
+.ritual li::before{
+  content:counter(r); position:absolute; left:0; top:-1px; width:33px; height:33px;
+  border-radius:50%; background:linear-gradient(135deg,#D9AE8B,#A9714E); color:#fff;
+  display:grid; place-items:center; font-family:var(--serif); font-weight:600; font-size:1.02rem;
+  box-shadow:0 4px 11px rgba(169,113,78,.3);
+}
+.ritual b{color:var(--green-dk)}
+@container pg (min-width:820px){ .split--rev .split-media{order:2} }
+
 /* ---------- Visual tiles (kapalit ng mahahabang talata) ---------- */
 .tiles{display:grid; grid-template-columns:repeat(2,1fr); gap:11px; margin-top:32px; max-width:980px; margin-inline:auto}
 @container pg (min-width:640px){ .tiles{grid-template-columns:repeat(3,1fr); gap:14px} }
@@ -549,36 +562,6 @@ body.has-sticky{padding-bottom:0}
   border-radius:12px; padding:20px 22px; color:#3E4A42;
 }
 .one-line p{margin:0}
-
-/* ---------- Mini 4-across strip ---------- */
-.mini{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr)); gap:10px; margin-top:32px}
-.mini div{text-align:center; padding:16px 10px}
-.mini .ico{margin:0 auto 11px; width:44px; height:44px}
-.mini b{display:block; font-size:.95rem; color:var(--green-dk); font-weight:600; margin-bottom:4px}
-.mini span{font-size:.8rem; color:var(--muted); line-height:1.5}
-
-/* ---------- Photo blocks ---------- */
-.fig{
-  border-radius:14px; background-size:cover; background-position:center;
-  background-repeat:no-repeat; box-shadow:var(--shadow-m);
-}
-.fig--capsules{background-image:var(--img-capsules); aspect-ratio:560/380; width:100%}
-.fig--cap{
-  background-image:var(--img-cap); aspect-ratio:1; width:150px; border-radius:50%;
-  margin:0 auto 20px; box-shadow:var(--shadow-l); border:5px solid #fff;
-}
-
-/* ---------- Nature strip ---------- */
-.nature{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:28px}
-.nature figure{margin:0; text-align:center}
-.nature .ph{
-  aspect-ratio:4/5; border-radius:12px; background-size:cover; background-position:center;
-  box-shadow:var(--shadow-s); margin-bottom:12px;
-}
-.nature .ph--leaf{background-image:var(--img-leaf)}
-.nature .ph--flower{background-image:var(--img-flower)}
-.nature .ph--stone{background-image:var(--img-stonetex)}
-.nature figcaption{font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--rose-dk); font-weight:600}
 
 /* ---------- Bottle-count graphic (kapalit ng paulit-ulit na litrato) ---------- */
 .bottles{display:flex; justify-content:center; align-items:flex-end; gap:4px; height:102px; margin-bottom:16px}
@@ -669,7 +652,21 @@ body.has-sticky{padding-bottom:0}
   </div>
 </section>
 
-<!-- ============ PAIN — icon tiles, hindi mahabang listahan ============ -->
+<!-- ============ SLEEP BANNER (litrato ang nagsasalita) ============ -->
+<section class="bleed bleed--bed">
+  <div class="wrap wrap--narrow">
+    <h2 class="rv">Ala-una Na.<br>Gising Ka Pa Rin.</h2>
+    <p class="rv">Ang magnesium ay isa sa mga unang nauubos kapag stressed at puyat — at habang kulang ka, mas mahirap mag-relax.</p>
+    <div class="chips rv">
+      <span>Stress at puyat</span>
+      <span>Sobrang kape</span>
+      <span>Processed na pagkain</span>
+      <span>Pawis sa init</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAIN TILES ============ -->
 <section class="sec sec--pain">
   <div class="wrap">
     <div class="center rv">
@@ -709,43 +706,13 @@ body.has-sticky{padding-bottom:0}
   </div>
 </section>
 
-<!-- ============ BAKIT NAUUBOS — compact strip ============ -->
-<section class="sec sec--tight sec--why">
-  <div class="wrap">
-    <div class="center rv">
-      <p class="eyebrow">Ang Totoong Dahilan</p>
-      <h2>Bakit Nauubos ang Magnesium Mo?</h2>
-      <hr class="rule">
-    </div>
-    <div class="mini rv">
-      <div>
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.9 4.9l2.9 2.9M16.2 16.2l2.9 2.9M2 12h4M18 12h4M4.9 19.1l2.9-2.9M16.2 7.8l2.9-2.9"/></svg></div>
-        <b>Stress at puyat</b><span>Mas mabilis maubos ang reserves</span>
-      </div>
-      <div>
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 9h13v5a5 5 0 01-5 5H9a5 5 0 01-5-5z"/><path d="M17 10h2a2 2 0 010 4h-2"/></svg></div>
-        <b>Sobrang kape</b><span>Kape't softdrinks, dagdag ubos</span>
-      </div>
-      <div>
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h12l-1 8H7z"/><path d="M8 11v10M16 11v10"/><path d="M4 21h16"/></svg></div>
-        <b>Processed na pagkain</b><span>Mababa sa magnesium</span>
-      </div>
-      <div>
-        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
-        <b>Init at pawis</b><span>Kasama ang minerals sa pawis</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ COMPARISON + CAPSULE PHOTO ============ -->
+<!-- ============ COMPARISON + REAL PHOTO + SPECS ============ -->
 <section class="sec sec--cmp">
   <div class="wrap">
     <div class="center rv">
       <p class="eyebrow">Ang Malaking Pagkakaiba</p>
       <h2>Hindi Lahat ng Magnesium<br>ay Pare-pareho</h2>
       <hr class="rule">
-      <p class="lede">Karamihan ng mura sa merkado ay <strong>Magnesium Oxide</strong> — mababa ang absorption at madalas nakaka-LBM.</p>
     </div>
 
     <div class="cmp-wrap rv">
@@ -764,18 +731,25 @@ body.has-sticky{padding-bottom:0}
       </table>
     </div>
 
-    <div class="split" style="margin-top:42px">
-      <div class="rv"><div class="fig fig--capsules" role="img" aria-label="Melioura vegetarian capsules"></div></div>
+    <div class="split" style="margin-top:44px">
+      <div class="split-media rv"><div class="shot shot--woman" role="img" aria-label="Customer na hawak ang Melioura Magnesium Glycinate"></div></div>
       <div class="rv">
         <h3>Bakit “Glycinate”?</h3>
-        <p>Nakakabit ang magnesium sa <strong>glycine</strong>, isang amino acid na kilala sa calming effect — kaya mas madaling ma-absorb at mas banayad sa tiyan.</p>
-        <p style="margin-bottom:0">Ibig sabihin: <strong>pwedeng gabi-gabi</strong>, hindi ka nito gigisingin para tumakbo sa CR.</p>
+        <p>Nakakabit ang magnesium sa <strong>glycine</strong> — kaya mas madaling ma-absorb at mas banayad sa tiyan. Pwedeng gabi-gabi, hindi ka gigisingin para tumakbo sa CR.</p>
+        <!-- PALITAN: itugma sa aktuwal mong label at FDA registration -->
+        <ul class="spec">
+          <li><span>Aktibong sangkap</span><span>Magnesium Bisglycinate</span></li>
+          <li><span>Elemental Magnesium</span><span>200 mg / serving</span></li>
+          <li><span>Laman</span><span>60 Vegetarian Capsules</span></li>
+          <li><span>Artificial colors</span><span>Wala</span></li>
+        </ul>
+        <p class="btn-note" style="margin-top:16px">⚠️ <strong>No Approved Therapeutic Claims.</strong></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ BENEFITS — tiles, maikli lang ============ -->
+<!-- ============ BENEFITS ============ -->
 <section class="sec sec--why">
   <div class="wrap">
     <div class="center rv">
@@ -787,7 +761,7 @@ body.has-sticky{padding-bottom:0}
     <div class="tiles">
       <div class="tile rv">
         <div class="ico"><svg viewBox="0 0 24 24"><path d="M20.5 14.5A8.5 8.5 0 019.5 3.5a8.5 8.5 0 1011 11z"/></svg></div>
-        <b>Mahimbing na Tulog</b><span>Hindi puputol-putol ang gabi mo</span>
+        <b>Mahimbing na Tulog</b><span>Hindi puputol-putol ang gabi</span>
       </div>
       <div class="tile rv">
         <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 00-5 5c0 1.8-1 2.6-1 4a4 4 0 004 4h4a4 4 0 004-4c0-1.4-1-2.2-1-4a5 5 0 00-5-5z"/><path d="M10 20h4"/></svg></div>
@@ -810,66 +784,33 @@ body.has-sticky{padding-bottom:0}
         <b>Gentle na Formula</b><span>Vegetarian, walang artificial colors</span>
       </div>
     </div>
-
-    <div class="center rv" style="margin-top:36px">
-      <a class="btn btn--lg" href="#order" style="margin-inline:auto">Gusto Ko Na Nito<small>COD · Libreng Shipping</small></a>
-    </div>
   </div>
 </section>
 
-<!-- ============ PRODUCT DETAIL ============ -->
+<!-- ============ ARAW-ARAW NA RITWAL (couple photo + steps) ============ -->
 <section class="sec sec--cmp">
-  <div class="wrap split">
-    <div class="split-media rv">
-      <div class="shot" role="img" aria-label="Melioura bottle detail"></div>
-    </div>
+  <div class="wrap split split--rev">
+    <div class="split-media rv"><div class="shot shot--couple" role="img" aria-label="Mag-partner na umiinom ng Melioura pagkatapos mag-ehersisyo"></div></div>
     <div class="rv">
-      <p class="eyebrow">Ano ang Nasa Loob</p>
-      <h2>Simple. Malinis.<br>Walang Palabok.</h2>
+      <p class="eyebrow">Sobrang Dali Lang</p>
+      <h2>Isang Maliit na Ritwal,<br>Gabi-gabi</h2>
       <hr class="rule rule--left">
-      <!-- PALITAN: itugma sa aktuwal mong label at FDA registration -->
-      <ul class="spec">
-        <li><span>Aktibong sangkap</span><span>Magnesium Bisglycinate</span></li>
-        <li><span>Elemental Magnesium</span><span>200 mg / serving</span></li>
-        <li><span>Laman</span><span>60 Vegetarian Capsules</span></li>
-        <li><span>Packaging</span><span>250 mL HDPE, sealed</span></li>
-        <li><span>Artificial colors</span><span>Wala</span></li>
-      </ul>
-      <p class="btn-note" style="margin-top:18px">⚠️ <strong>No Approved Therapeutic Claims.</strong></p>
+      <!-- PALITAN: itugma ang dosage sa nakasulat sa label mo -->
+      <ol class="ritual">
+        <li><b>Bago matulog.</b> Sundin ang label — karaniwang 30–60 minuto bago matulog, kasama ng tubig.</li>
+        <li><b>Araw-araw.</b> Kahit weekend. Binubuo ito sa paglipas ng mga araw, hindi agad-agad.</li>
+        <li><b>2–4 na linggo.</b> Doon pinaka-napapansin ng karamihan ang pagbabago.</li>
+      </ol>
+      <a class="btn" href="#order" style="margin-top:24px">Simulan Na<small>COD · Libreng Shipping</small></a>
     </div>
-  </div>
-</section>
-
-<!-- ============ NATURE STRIP — visual break ============ -->
-<section class="sec sec--tight sec--why">
-  <div class="wrap wrap--narrow center">
-    <p class="eyebrow rv">Inspired by Nature</p>
-    <h2 class="rv">Nature's Balance,<br>Within You</h2>
-    <hr class="rule">
-    <div class="nature">
-      <figure class="rv"><div class="ph ph--leaf" role="img" aria-label="Dahon na may hamog"></div><figcaption>Purity</figcaption></figure>
-      <figure class="rv"><div class="ph ph--flower" role="img" aria-label="Puting bulaklak"></div><figcaption>Gentleness</figcaption></figure>
-      <figure class="rv"><div class="ph ph--stone" role="img" aria-label="Natural na bato"></div><figcaption>Balance</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<!-- ============ BANNER ============ -->
-<section class="banner">
-  <div class="wrap wrap--narrow">
-    <p class="eyebrow eyebrow--light rv">A Healthier Today, A Brighter Tomorrow</p>
-    <h2 class="rv">Nasa Maliliit na Desisyon<br>ang Wellness</h2>
-    <p class="rv">Isang maliit na gawi gabi-gabi — at sa loob ng ilang linggo, mas magaan ka nang gumising.</p>
-    <a class="btn btn--lg rv" href="#order">Simulan Na Natin<small>Bayad pagdating sa bahay mo</small></a>
   </div>
 </section>
 
 <!-- ============ TESTIMONIALS ============
      ⚠️ PALITAN: sample lang ang tatlong review na ito. Gamitin ang TOTOONG
-     feedback ng mga customer mo. Ang gawa-gawang review ay labag sa DTI at
-     sa patakaran ng Facebook/TikTok ads.
-     TIP: ang pinakamataas na converting dito ay litrato ng totoong customer
-     na hawak ang bote. Palitan ang .av na initials ng litrato nila:
+     feedback ng mga customer mo — labag sa DTI at sa patakaran ng Facebook/
+     TikTok ads ang gawa-gawang review.
+     TIP: palitan ang .av initials ng litrato ng customer:
      <span class="av" style="background-image:url('LINK');background-size:cover"></span>
 ================================================================= -->
 <section class="sec sec--rev">
@@ -888,52 +829,28 @@ body.has-sticky{padding-bottom:0}
     <div class="revs">
       <div class="rev rv">
         <span class="stars" aria-hidden="true">★★★★★</span>
-        <p class="rev-q">“Night shift ako sa BPO. Ngayon mas mabilis na akong makatulog at hindi na paulit-ulit ang gising. Hindi rin nakaka-LBM.”</p>
+        <p class="rev-q">“Night shift ako sa BPO. Ngayon mas mabilis na akong makatulog at hindi na paulit-ulit ang gising.”</p>
         <div class="rev-who"><span class="av">JM</span><span><b>Jam M.</b><span>Quezon City</span></span><span class="vfy">Verified</span></div>
       </div>
       <div class="rev rv">
         <span class="stars" aria-hidden="true">★★★★★</span>
-        <p class="rev-q">“Nanay ako ng tatlo at ang ikli ng pasensya ko dati sa gabi. Pangalawang linggo, napansin ng asawa ko na mas kalmado raw ako.”</p>
+        <p class="rev-q">“Nanay ako ng tatlo at ang ikli ng pasensya ko dati sa gabi. Pangalawang linggo, mas kalmado na raw ako.”</p>
         <div class="rev-who"><span class="av">RC</span><span><b>Rowena C.</b><span>Cavite</span></span><span class="vfy">Verified</span></div>
       </div>
       <div class="rev rv">
         <span class="stars" aria-hidden="true">★★★★★</span>
-        <p class="rev-q">“Laging pulikat ang binti ko sa gabi dahil sa gym. Mas maganda ang recovery at tulog ko ngayon. Nasa third bottle na ako.”</p>
+        <p class="rev-q">“Laging pulikat ang binti ko dahil sa gym. Mas maganda ang recovery at tulog ko ngayon.”</p>
         <div class="rev-who"><span class="av">KD</span><span><b>Kevin D.</b><span>Makati</span></span><span class="vfy">Verified</span></div>
       </div>
     </div>
-    <p class="cmp-note" style="margin-top:22px">Indibidwal ang karanasan at maaaring mag-iba sa bawat tao.</p>
   </div>
 </section>
 
-<!-- ============ PAANO INUMIN ============ -->
-<section class="sec sec--how">
-  <div class="wrap">
-    <div class="center rv">
-      <div class="fig fig--cap" role="img" aria-label="Melioura cap detail"></div>
-      <p class="eyebrow">Sobrang Dali Lang</p>
-      <h2>Paano Ito Inumin</h2>
-      <hr class="rule">
-    </div>
-
-    <div class="steps">
-      <!-- PALITAN: itugma ang dosage sa nakasulat sa label mo -->
-      <div class="step rv">
-        <div class="step-n">1</div>
-        <h3>Bago matulog</h3>
-        <p>Sundin ang label — karaniwang <strong>30–60 minuto bago matulog</strong>, kasama ng tubig.</p>
-      </div>
-      <div class="step rv">
-        <div class="step-n">2</div>
-        <h3>Araw-araw</h3>
-        <p>Kahit weekend. <strong>Binubuo ito sa paglipas ng araw</strong>, hindi agad-agad.</p>
-      </div>
-      <div class="step rv">
-        <div class="step-n">3</div>
-        <h3>2–4 na linggo</h3>
-        <p>Doon <strong>pinaka-napapansin</strong> ng karamihan ang pagbabago.</p>
-      </div>
-    </div>
+<!-- ============ BRAND CREATIVE + CTA ============ -->
+<section class="sec sec--tight sec--why">
+  <div class="wrap center">
+    <img class="creative rv" src="__IMG_BRAND_SRC__" alt="Melioura — a small daily ritual for a calmer, more balanced tomorrow" loading="lazy" width="800" height="1000">
+    <a class="btn btn--lg rv" href="#order" style="margin:28px auto 0">Gusto Ko Na Nito<small>Bayad pagdating sa bahay mo</small></a>
   </div>
 </section>
 

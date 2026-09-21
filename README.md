@@ -102,40 +102,38 @@ sa `:root` ng CSS:
 
 ## Mga larawan — saan ginagamit ang bawat isa
 
-**Walang inuulit.** Walong magkakaibang larawan, isang beses lang bawat isa:
+**Limang totoong litrato, isang beses lang bawat isa. Walang inuulit.**
 
-| Larawan | Saan lumalabas |
-|---|---|
-| `hero.jpg` | Hero — bote sa bato |
-| `capsules.jpg` | Seksyon ng “Bakit Glycinate” |
-| `lifestyle.jpg` | “Ano ang Nasa Loob” |
-| `cap.jpg` | “Paano Ito Inumin” (bilog na detalye) |
-| `leaf.jpg` · `flower.jpg` · `stonetex.jpg` | Nature strip |
-| `sunrise.jpg` | Banner CTA |
+| Larawan | Saan lumalabas | Bakit doon |
+|---|---|---|
+| `product.webp` | Hero | Transparent ang background, kaya lumulutang ang bote — walang kahon, mas premium |
+| `bed.webp` | Sleep banner (full-bleed) | Tugma sa hook na “Ala-una na, gising ka pa rin” |
+| `woman.webp` | “Bakit Glycinate” | Totoong tao + totoong laki ng bote |
+| `couple.webp` | “Isang Maliit na Ritwal” | Ipinapakita mismo ang pag-inom — hindi na kailangang ipaliwanag |
+| `brand.webp` | Bago ang presyo | May sariling text na ang creative, kaya buo itong ipinapakita |
 
 Ang bilang ng bote sa pricing cards ay **SVG na guhit**, hindi litrato — kaya
-hindi paulit-ulit ang parehong larawan sa tatlong card, at mas mabilis maintindihan
-kung ilang bote ang makukuha.
+mas mabilis maintindihan kung ilang bote ang makukuha, at walang paulit-ulit
+na larawan.
 
-### ⚠️ Ang pinakamalaking pagkakataon: totoong litrato
-Lahat ng larawan sa itaas ay **crop mula sa iisang brand board** — maganda,
-pero pawang product at texture shots. Ang pinakamataas na converting sa PH
-COD market ay **litrato ng totoong tao**. Kung isa lang ang kaya mong kunan:
-
-1. **Customer na hawak ang bote** (UGC style, cellphone photo lang, natural light)
-2. Bote sa tabi ng kama / bedside table sa gabi
-3. Bote sa kamay — para makita ang totoong laki
-4. Unboxing: parcel, box, at bote
-
-I-upload sa WebCake media library, tapos palitan ang `--img-*` variable
-sa `:root` ng CSS. Isang linya lang bawat isa.
+### Kung magpapalit ka ng litrato
+Palitan lang ang file sa `assets/` (panatilihin ang pangalan) at patakbuhin ang
+`python3 build.py`. Kung sa WebCake media library mo ia-upload, palitan ang
+`--img-*` variables sa `:root` ng CSS.
 
 ## Bigat ng page
 
-Humigit-kumulang **395 KB** ang self-contained na file dahil naka-base64 ang
-walong larawan. Sa mobile data, mas mabilis kung **i-upload mo ang mga litrato
-sa WebCake** at ituro na lang ang `--img-*` sa CDN links — bumababa ito sa
-~60 KB na HTML.
+Dalawang bersyon ang ginagawa ng `build.py`:
+
+| File | Laki | Para saan |
+|---|---|---|
+| `melioura-landing.html` | ~418 KB (isang file) | I-paste sa WebCake HTML block |
+| `public/index.html` | 77 KB + 257 KB litrato | Netlify / GitHub Pages — mas mabilis sa mobile data |
+
+Mas magaan ang `public/` na bersyon dahil hiwalay ang mga litrato: sabay-sabay
+silang nada-download at naka-cache sa susunod na bisita. Kung kaya ng WebCake
+plan mo ang media library, doon mo i-upload ang mga litrato at ituro ang
+`--img-*` sa CDN links — bumababa ang HTML sa ~77 KB.
 
 ## Responsiveness — paano ito gumagana
 
