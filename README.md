@@ -43,13 +43,30 @@ Search the file for **`REPLACE`** (Ctrl+F).
 | 6 | **Where orders go** | `CONFIG.FORM_ENDPOINT` in the `<script>` |
 
 ### 1. Prices
-Edit these only. The order form and the sticky bar follow them automatically:
+
+Four tiers. Only the `data-` attributes are the source of truth — the order
+form's package rows, the order summary and the sticky bar all read from them.
+
+| Tier | Price | Was | Per bottle | Saves |
+|---|---|---|---|---|
+| 1 Bottle | ₱1,460 | ₱1,990 | ₱1,460 | ₱530 |
+| 2 Bottles | ₱2,590 | ₱3,980 | ₱1,295 | ₱1,390 |
+| **3 Bottles** (Best Value) | **₱3,490** | ₱5,970 | ₱1,163 | ₱2,480 |
+| 5 Bottles | ₱4,990 | ₱9,950 | ₱998 | ₱4,960 |
+
+₱1,460 for one bottle is the figure you set. The rest step the per-bottle price
+down (₱1,460 → ₱1,295 → ₱1,163 → ₱998) so each tier is visibly better value,
+with the 5-pack breaking the ₱1,000 barrier. The ₱1,990 "was" price is a
+placeholder SRP — set it to your real list price.
+
+> **Check your margin.** I do not know your landed cost per bottle. The 5-pack
+> sells each bottle at 68% of the single price, so confirm that still makes
+> money before you run ads to it.
 
 ```html
-<div class="plan" data-plan="3 Bottles — Buy 2 Get 1 Free"
-     data-qty="3" data-price="1980" data-was="4770">
+<div class="plan" data-plan="3 Bottles" data-qty="3" data-price="3490" data-was="5970">
 ```
-Remember to update the visible text inside the card too.
+Update the visible text inside the card to match.
 
 ### 2. Testimonials — **important**
 All six reviews are placeholders. Replace them with **real customer feedback**
@@ -61,23 +78,81 @@ The hosted copy in `public/` shows a visible "Sample reviews" badge and carries
 `noindex` for exactly this reason. Both disappear once you swap in real reviews
 and remove the badge from `build.py`.
 
-### 6. Where orders go
-**Option A — WebCake native form (recommended).**
-Replace the whole `<form class="order-form"> ... </form>` with your WebCake
-Order Form element. Do not remove `<section id="order">` — every button on the
-page points at it.
+### 6. Where orders go — WebCake → Pancake POS
 
-**Option B — your own endpoint.**
+**This is the one step that decides whether orders reach your POS.**
+
+The form built into this page is a *fallback*. It cannot create orders in
+Pancake by itself. For orders to land in `pos.pancake.biz`, the page must use
+**WebCake's own Order Form element**, because that is what is wired to your
+Pancake shop.
+
+**Do this:**
+
+1. In Pancake, create the product and add **one variant per tier**, named
+   exactly as the page names them:
+   `1 Bottle` · `2 Bottles` · `3 Bottles` · `5 Bottles`
+   These strings come from `data-plan` in the pricing cards. Keeping them
+   identical means the tier a customer picks maps cleanly to a POS variant,
+   and your stock and reports stay correct.
+2. Set each variant's price to the table above.
+3. In WebCake, open the page and drop the **Order Form** element inside
+   `<section id="order">`, then delete the `<form class="order-form"> ... </form>`
+   block. **Keep `<section id="order">` itself** — every CTA on the page,
+   including the sticky mobile bar, scrolls to that anchor.
+4. Connect the WebCake page to your Pancake shop in WebCake's settings, and
+   place one live test order to confirm it appears in the POS before spending
+   on ads.
+
+**If you keep the built-in form instead**, set your own endpoint:
 ```js
 FORM_ENDPOINT: "https://script.google.com/macros/s/AKfy.../exec",
 ```
-Google Apps Script, Zapier or Make all work. It POSTs JSON:
-`package, quantity, amount, name, phone, address, city, province, note, payment, page, at`.
+It POSTs JSON: `package, quantity, amount, name, phone, address, city,
+province, note, payment, page, at`. Google Apps Script, Zapier or Make all
+work, and you would then push those into Pancake yourself.
 
 > ⚠️ If `FORM_ENDPOINT` is **blank**, the thank-you screen still appears but
 > **the order goes nowhere**. That is test mode only.
 
 ---
+
+## Page structure
+
+Sections in order, following the proven Cash-on-Delivery funnel pattern:
+
+1. Promo bar with countdown · sticky header
+2. Hero — product, benefits, CTA
+3. Trust strip (shipping · COD · quality · vegetarian)
+4. **FDA Registered and Certified** ← add your real certificates here
+5. Sleep banner (full-bleed photo + hook)
+6. "Does This Sound Like You?" — six concern tiles
+7. Comparison table: glycinate vs oxide vs citrate, plus specs
+8. Six benefits
+9. "However Your Day Ends" — lifestyle strip
+10. "One Small Habit" — three dosage steps
+11. Six testimonials
+12. Brand creative
+13. "Here's What Arrives" — packaging, before the price
+14. **Pricing — four tiers** + limited-stock note + guarantee
+15. **How Ordering Works** — four-step delivery timeline
+16. FAQ
+17. Order form with **selectable package rows** + reassurance row
+18. **Closing CTA band**
+19. Footer with compliance notice
+
+### Patterns deliberately not copied
+
+A reference page may show these; they are left out because they would require
+inventing things you do not have:
+
+| Pattern | Why not |
+|---|---|
+| Before/after photos | Would be fabricated, and implies a treatment claim the FDA does not allow for a food supplement |
+| Doctor or founder endorsement | Needs a real, named person who agrees to it. Easy to add later — ask and I will build the section |
+| "As seen on" media logos | Only legitimate if you have actually been featured |
+| Live "someone just ordered" popups | Fabricated social proof |
+| 60-day money-back guarantee | That is a policy decision, not a design one. The page says 7 days — change it if your policy differs |
 
 ## Photos — where each one is used
 
